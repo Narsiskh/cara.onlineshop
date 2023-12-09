@@ -1,0 +1,72 @@
+@import "../assets/variables"
+@import "../assets/main"
+
+.blog-header
+  background-image: url("../img/banner/b19.jpg")
+
+#blog
+  padding: 150px 150px 0 150px
+
+  @media (max-width: 477px)
+    padding: 100px 20px 0 20px
+
+  .blog-box
+    padding-bottom: 90px
+
+    @media (max-width: 477px)
+      display: flex
+      flex-direction: column
+      align-items: flex-start
+      width: 100%
+      position: relative
+      padding-bottom: 90px
+
+    h1
+      top: -40px
+      left: 0
+      font-size: 70px
+      font-weight: 700
+      color: #c9cbce
+      z-index: -9
+
+    .blog-img
+      margin-right: 40px
+
+      @media (max-width: 477px)
+        width: 100%
+        margin-right: 0
+        margin-bottom: 30px
+
+      img
+        height: 470px
+        object-fit: cover
+
+
+    .blog-details
+      @media (max-width: 477px)
+        width: 100%
+
+      a
+        color: $dark
+        font-size: 11px
+        font-weight: 700
+        text-decoration: none
+        transition: 0.3s
+
+      &::after
+        content: ""
+        width: 50px
+        height: 1px
+        background-color: $dark
+        position: absolute
+        top: 4px
+        right: -60px
+
+      &:hover
+        color: $secondaryColor
+
+      &:hover::after
+        background-color: $secondaryColor
+
+
+
