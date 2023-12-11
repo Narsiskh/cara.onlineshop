@@ -1,4 +1,46 @@
 <script setup lang="ts">
+import type {Product} from "@/interfaces"
+import {type Ref, ref} from "vue"
+import CartProduct from "@/components/CartProduct.vue"
+
+
+const total = ref(0)
+const totalArr: Ref<number[]> = ref([])
+
+const cartProducts: Ref<Product[]> = ref([
+  {
+    "id": 1,
+    "img": "../img/products/f1.jpg",
+    "brand": "adidas",
+    "name": "Hawaiian Shirt",
+    "price": "$139",
+    "type": "Home / Shirt",
+    "details": "The Hawaiian Shirt is made from a substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton, this classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turing package."
+  },
+  {
+    "id": 2,
+    "img": "../img/products/f2.jpg",
+    "brand": "adidas",
+    "name": "Hawaiian Shirt",
+    "price": "$139",
+    "type": "Home / Shirt",
+    "details": "The Hawaiian Shirt is made from a substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton, this classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turing package."
+  },
+  {
+    "id": 3,
+    "img": "../img/products/f3.jpg",
+    "brand": "adidas",
+    "name": "Hawaiian Shirt",
+    "price": "$53",
+    "type": "Home / Shirt",
+    "details": "The Hawaiian Shirt is made from a substantial 6.0 oz. per sq. yd. fabric constructed from 100% cotton, this classic fit preshrunk jersey knit provides unmatched comfort with each wear. Featuring a taped neck and shoulder, and a seamless double-needle collar, and available in a range of colors, it offers it all in the ultimate head-turing package."
+  }
+].map((value) => {
+  total.value += parseInt(value.price.split("$")[1])
+  totalArr.value.push(total.value)
+
+  return value
+}))
 
 </script>
 
@@ -22,30 +64,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td><a href="#"><i class="bi bi-x-circle"></i></a></td>
-        <td><img src="../img/products/f2.jpg"></td>
-        <td>Cartoon Astronaut T-Shirts</td>
-        <td>$118.19</td>
-        <td><input type="number" value="1"></td>
-        <td>$118.19</td>
-      </tr>
-      <tr>
-        <td><a href="#"><i class="bi bi-x-circle"></i></a></td>
-        <td><img src="../img/products/f3.jpg" class="image"></td>
-        <td>Cartoon Astronaut T-Shirts</td>
-        <td>$118.19</td>
-        <td><input type="number" value="1"></td>
-        <td>$118.19</td>
-      </tr>
-      <tr>
-        <td><a href="#"><i class="bi bi-x-circle"></i></a></td>
-        <td><img src="../img/products/f1.jpg"></td>
-        <td>Cartoon Astronaut T-Shirts</td>
-        <td>$118.19</td>
-        <td><input type="number" value="1"></td>
-        <td>$118.19</td>
-      </tr>
+      <CartProduct v-for="(product, index) in cartProducts" :key="product.id" :product="product" :total="totalArr[index]"/>
       </tbody>
     </table>
   </section>
@@ -80,4 +99,4 @@
   </section>
 </template>
 
-<style src="../assets/cart.sass" scoped lang="sass"></style>
+<style src="../assets/cart.sass" lang="sass"></style>
